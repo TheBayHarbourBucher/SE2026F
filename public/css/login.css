@@ -1,0 +1,213 @@
+/* ── LOGIN PAGE ── */
+
+body {
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 900px;
+    height: 580px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(124, 58, 237, 0.18);
+}
+
+/* ── LEFT PANEL ── */
+.left {
+    background: var(--brand-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.12;
+}
+.blob-1 { width: 240px; height: 240px; background: var(--brand);  top: -80px;  left: -80px; }
+.blob-2 { width: 200px; height: 200px; background: #4F46E5;        bottom: -60px; right: -60px; }
+.blob-3 { width: 130px; height: 130px; background: #C026D3;        top: 48%;    left: 62%; }
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 1;
+    text-align: center;
+}
+
+.brand-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px;
+    background: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+.brand-icon i  { font-size: 34px; color: #fff; }
+.brand-name    { font-size: 34px; font-weight: 900; color: #fff; letter-spacing: -.5px; }
+.brand-name span { color: var(--brand-light); }
+.brand-tag     { font-size: 13px; color: var(--brand-muted); font-weight: 500; max-width: 210px; line-height: 1.6; margin-top: 4px; }
+
+.features {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    z-index: 1;
+}
+
+.feat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.feat-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: rgba(124, 58, 237, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.feat-dot i { font-size: 15px; color: var(--brand-light); }
+
+/* ── RIGHT PANEL ── */
+.right {
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.form-box {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 36px 30px;
+    width: 100%;
+    max-width: 340px;
+}
+
+.form-title { font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 4px; letter-spacing: -.3px; }
+.form-sub   { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 26px; }
+
+/* ── ROLE TOGGLE ── */
+.role-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 22px;
+    background: var(--surface-2);
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.role-btn {
+    padding: 10px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--text-muted);
+    border: none;
+    background: transparent;
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.18s;
+}
+.role-btn i           { font-size: 14px; }
+.role-btn.active      { background: var(--brand); color: #fff; }
+.role-btn.teacher-active { background: var(--green); color: #fff; }
+
+/* ── FORM FIELDS ── */
+.field { margin-bottom: 14px; }
+
+.field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 5px;
+    letter-spacing: .02em;
+}
+
+.field input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    background: #FAFAFA;
+    transition: border-color 0.15s;
+}
+.field input:focus       { border-color: var(--brand); background: #fff; }
+.field input::placeholder { color: #C4B5FD; font-weight: 400; }
+
+/* ── SUBMIT Btn ── */
+.login-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    background: var(--brand);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    transition: opacity 0.15s;
+    margin-top: 6px;
+}
+.login-btn:hover { opacity: 0.88; }
+
+/* ── ERROR MESSAGE ── */
+.error-msg {
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 11px;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.error-msg i { font-size: 14px; flex-shrink: 0; }
+
+/* ── MOBILE ── */
+@media (max-width: 700px) {
+    .page                  { grid-template-columns: 1fr; width: 95vw; height: auto; }
+    .left                  { display: none; }
+    .right                 { padding: 24px 16px; }
+}

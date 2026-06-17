@@ -1,0 +1,89 @@
+/* ── DARK MODE ── */
+/* Add these variables to the bottom of main.css */
+
+html.dark body {
+    background: #0F0F1C !important;
+    color: #E2E8F0;
+}
+
+/* Sidebar stays dark already — no change needed */
+
+/* Topbar */
+html.dark .topbar {
+    background: #1A1A2E !important;
+    border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+
+html.dark .greeting { color: #E2E8F0 !important; }
+html.dark .subdate  { color: #94A3B8 !important; }
+
+/* Cards */
+html.dark .card {
+    background: #1A1A2E !important;
+    border-color: rgba(255,255,255,0.08) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+}
+
+html.dark .ctitle-left { color: #E2E8F0 !important; }
+
+/* Task items */
+html.dark .titem       { border-bottom-color: rgba(255,255,255,0.06) !important; }
+html.dark .tname       { color: #E2E8F0 !important; }
+html.dark .tname.done  { color: #475569 !important; }
+html.dark .tmeta       { color: #64748B !important; }
+html.dark .chk         { border-color: #334155 !important; }
+
+/* Subject bars */
+html.dark .btrack { background: rgba(255,255,255,0.08) !important; }
+html.dark .blbl   { color: #94A3B8 !important; }
+
+/* Deadline cards */
+html.dark .dcard {
+    background: #1A1A2E !important;
+    border-color: rgba(255,255,255,0.08) !important;
+    box-shadow: none !important;
+}
+html.dark .dtitle { color: #E2E8F0 !important; }
+
+/* Stat cards stay same dark colours — no change needed */
+
+/* Teacher cards */
+html.dark .task-name  { color: #E2E8F0 !important; }
+html.dark .task-due   { color: #94A3B8 !important; }
+html.dark .student-name { color: #E2E8F0 !important; }
+
+/* Modal */
+html.dark .modal {
+    background: #1A1A2E !important;
+    border: 0.5px solid rgba(255,255,255,0.1);
+}
+html.dark .modal-title { color: #E2E8F0 !important; }
+html.dark .form-field label { color: #E2E8F0 !important; }
+html.dark .form-field input,
+html.dark .form-field select,
+html.dark .form-field textarea {
+    background: #0F0F1C !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    color: #E2E8F0 !important;
+}
+
+/* Dark mode toggle button */
+.dark-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: #F0EBFF;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #7C3AED;
+    font-size: 18px;
+    transition: all 0.15s;
+}
+html.dark .dark-toggle {
+    background: rgba(255,255,255,0.08) !important;
+    color: #A78BFA !important;
+}
+.dark-toggle:hover { opacity: 0.8; }

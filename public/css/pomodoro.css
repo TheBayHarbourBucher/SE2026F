@@ -1,0 +1,286 @@
+/* ── POMODORO LAYOUT ── */
+.pom-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+/* ── MAIN TIMER CARD ── */
+.pom-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+/* ── MODE TABS ── */
+.pom-tabs {
+    display: flex;
+    gap: 6px;
+    background: #F3EEFF;
+    border-radius: 12px;
+    padding: 5px;
+    width: 100%;
+}
+
+.pom-tab {
+    flex: 1;
+    padding: 8px;
+    border-radius: 9px;
+    border: none;
+    background: transparent;
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #9B7FC7;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+.pom-tab.active { background: #7C3AED; color: #fff; }
+.pom-tab:hover:not(.active) { background: rgba(124,58,237,0.1); color: #7C3AED; }
+
+/* ── RING TIMER ── */
+.pom-ring-wrap {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pom-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+.ring-bg {
+    fill: none;
+    stroke: #F3EEFF;
+    stroke-width: 12;
+}
+.ring-progress {
+    fill: none;
+    stroke: #7C3AED;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 553;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+
+.pom-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 1;
+}
+
+.pom-time {
+    font-size: 52px;
+    font-weight: 900;
+    color: #1A0533;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.pom-mode-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9B7FC7;
+}
+
+/* ── CONTROLS ── */
+.pom-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pom-btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 14px;
+    background: #7C3AED;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    transition: opacity 0.15s;
+    min-width: 120px;
+    justify-content: center;
+}
+.pom-btn-primary:hover { opacity: 0.88; }
+.pom-btn-primary i { font-size: 18px; }
+
+.pom-btn-secondary {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #F3EEFF;
+    border: none;
+    color: #7C3AED;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.pom-btn-secondary:hover { background: #7C3AED; color: #fff; }
+
+/* ── RIGHT COLUMN ── */
+.pom-right {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pom-stats-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.pom-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1A0533;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 14px;
+}
+.pom-card-title i { font-size: 15px; color: #7C3AED; }
+
+/* ── SESSION DOTS ── */
+.session-dot-wrap {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.session-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #F3EEFF;
+    border: 2px solid #EDE9FE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #C4B5FD;
+    transition: all 0.3s;
+}
+.session-dot.done {
+    background: #7C3AED;
+    border-color: #7C3AED;
+    color: #fff;
+}
+.session-dot.done::after { content: '✓'; }
+.session-dot:not(.done)::after { content: attr(data-num); }
+
+/* ── STAT ROW ── */
+.pom-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.pom-stat {
+    background: #F7F5FF;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+.pom-stat-num { font-size: 22px; font-weight: 800; color: #7C3AED; }
+.pom-stat-lbl { font-size: 10px; color: #9B7FC7; font-weight: 600; margin-top: 2px; }
+
+/* ── SETTINGS ── */
+.pom-setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 0.5px solid #F3EEFF;
+}
+.pom-setting:last-child { border-bottom: none; }
+.pom-setting label { font-size: 12px; font-weight: 600; color: #1A0533; }
+
+.pom-setting-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.pom-setting-controls span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7C3AED;
+    min-width: 48px;
+    text-align: center;
+}
+.pom-setting-controls button {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    border: 1.5px solid #EDE9FE;
+    background: #F7F5FF;
+    color: #7C3AED;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+.pom-setting-controls button:hover { background: #7C3AED; color: #fff; border-color: #7C3AED; }
+
+/* ── TIPS ── */
+.tip-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: #9B7FC7;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.tip-item:last-child { margin-bottom: 0; }
+.tip-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #7C3AED;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ── BREAK MODE COLOURS ── */
+.break-mode .ring-progress { stroke: #059669; }
+.break-mode .pom-btn-primary { background: #059669; }
+.break-mode .pom-tab.active { background: #059669; }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+    .pom-layout { grid-template-columns: 1fr; }
+}

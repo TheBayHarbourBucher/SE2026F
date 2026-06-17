@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/darkmode.css">
+    <script src="/js/darkmode.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync — Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7C3AED">
+</head>
+<body>
+
+<div class="page">
+
+    <!-- LEFT: Branding -->
+    <div class="left">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="brand">
+            <div class="brand-icon"><i class="ti ti-bolt"></i></div>
+            <div class="brand-name">Study<span>Sync</span></div>
+            <div class="brand-tag">Your all-in-one study and task management platform</div>
+        </div>
+        <div class="features">
+            <div class="feat"><div class="feat-dot"><i class="ti ti-clipboard-check"></i></div>Track your assesments</div>
+            <div class="feat"><div class="feat-dot"><i class="ti ti-chart-bar"></i></div>get tasks from teachers</div>
+            <div class="feat"><div class="feat-dot"><i class="ti ti-clock"></i></div>Focus with the Pomodoro timer</div>
+            <div class="feat"><div class="feat-dot"><i class="ti ti-calendar"></i></div>Plan your week with the study planner</div>
+        </div>
+    </div>
+
+    <!-- RIGHT: Login Form -->
+    <div class="right">
+        <button id="darkModeToggle" class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode" style="position: absolute; top: 20px; right: 20px;">
+            <i class="ti ti-moon"></i>
+        </button>
+        <div class="form-box">
+            <div class="form-title">Welcome back</div>
+            <div class="form-sub">Sign in to continue to StudySync</div>
+
+            <div class="role-toggle">
+                <button type="button" class="role-btn active" id="btnStudent" onclick="setRole('student')">
+                    <i class="ti ti-user"></i> Student
+                </button>
+                <button type="button" class="role-btn" id="btnTeacher" onclick="setRole('teacher')">
+                    <i class="ti ti-chalkboard"></i> Teacher
+                </button>
+            </div>
+
+            <div id="errorBox" class="error-msg" style="display:none">
+                <i class="ti ti-alert-circle"></i>
+                <span id="errorText"></span>
+            </div>
+
+            <form method="POST" action="/login">
+                <input type="hidden" name="role" id="roleInput" value="student">
+                <div class="field">
+                    <label>Email address</label>
+                    <input type="email" name="email" placeholder="you@school.edu.au" required />
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter your password" required />
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">Sign in</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/login.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log('Service worker registered'))
+            .catch(err => console.log('SW error:', err))
+    }
+</script>
+
+</body>
+</html>

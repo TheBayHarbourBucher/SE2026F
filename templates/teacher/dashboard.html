@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/darkmode.css">
+    <script src="/js/darkmode.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync — Teacher Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/teacher.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7C3AED">
+</head>
+<body>
+<div class="shell">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo"><div class="logo-icon"><i class="ti ti-bolt"></i></div></div>
+        <nav class="nav">
+
+        </nav>
+        <div class="nav-bottom">
+            <a href="/logout" class="ni" title="Logout"><i class="ti ti-logout"></i></a>
+            <div class="uav" id="userAvatar">?</div>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div>
+                <div class="greeting" id="greeting">Teacher Dashboard</div>
+                <div class="subdate" id="subdate"></div>
+            </div>
+            <div class="topright">
+                <button id="darkModeToggle" class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">
+                    <i class="ti ti-moon"></i>
+                </button>
+                <button class="addbtn" onclick="openAddTask()"><i class="ti ti-plus"></i> New task</button>
+            </div>
+        </div>
+
+        <div class="body">
+
+            <!-- STAT CARDS -->
+            <div class="stats">
+                <div class="sc sc-1">
+                    <div class="sc-icon"><i class="ti ti-users"></i></div>
+                    <div class="sc-num" id="statStudents">—</div>
+                    <div class="sc-lbl">Students</div>
+                </div>
+                <div class="sc sc-2">
+                    <div class="sc-icon"><i class="ti ti-clipboard-list"></i></div>
+                    <div class="sc-num" id="statTasks">—</div>
+                    <div class="sc-lbl">Active tasks</div>
+                </div>
+                <div class="sc sc-3">
+                    <div class="sc-icon"><i class="ti ti-chart-bar"></i></div>
+                    <div class="sc-num" id="statAvg">—</div>
+                    <div class="sc-lbl">Avg completion</div>
+                </div>
+                <div class="sc sc-4">
+                    <div class="sc-icon"><i class="ti ti-alert-circle"></i></div>
+                    <div class="sc-num" id="statBehind">—</div>
+                    <div class="sc-lbl">Students behind</div>
+                </div>
+            </div>
+
+            <!-- TASKS + STUDENTS -->
+            <div class="row2">
+
+                <!-- ACTIVE TASKS -->
+                <div class="card">
+                    <div class="ctitle">
+                        <div class="ctitle-left"><i class="ti ti-clipboard-list"></i> Active tasks</div>
+                        
+                    </div>
+                    <div class="table-head">
+                        <span>Task</span>
+                        <span>Subject</span>
+                        <span>Due</span>
+                        <span>Completed</span>
+                    </div>
+                    <div id="tasksList"><div class="loading">Loading...</div></div>
+                </div>
+
+                <!--if the student completed or not-->
+                <div class="card">
+                    <div class="ctitle">
+                        <div class="ctitle-left"><i class="ti ti-users"></i> Student completion</div>
+                    </div>
+                    <div class="students-scroll" id="studentsList">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ADD TASK MODAL -->
+<div class="modal-overlay" id="addModal" onclick="closeModalOverlay(event)">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle">New task</div>
+            <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="editTaskId" value="">
+            <div class="form-field">
+                <label>Task title</label>
+                <input type="text" id="taskTitle" placeholder="e.g. Chapter 5 Essay" />
+            </div>
+            <div class="form-field">
+                <label>Subject</label>
+                <select id="taskSubject">
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="English">English</option>
+                    <option value="Science">Science</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Art">Art</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label>Description</label>
+                <textarea id="taskDesc" placeholder="Task instructions..."></textarea>
+            </div>
+            <div class="form-field">
+                <label>Due date</label>
+                <input type="date" id="taskDue" />
+            </div>
+            <div class="form-error" id="formError"></div>
+            <button class="save-btn" onclick="saveTask()">Save task</button>
+        </div>
+    </div>
+</div>
+
+<script src="/js/teacher.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log('Service worker registered'))
+            .catch(err => console.log('SW error:', err))
+    }
+</script>
+</body>
+</html>

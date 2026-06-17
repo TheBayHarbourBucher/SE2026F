@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/darkmode.css">
+    <script src="/js/darkmode.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync — Study Planner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/planner.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7C3AED">
+</head>
+<body>
+<div class="shell">
+    <div class="sidebar">
+        <div class="logo"><div class="logo-icon"><i class="ti ti-bolt"></i></div></div>
+        <nav class="nav">
+            <a href="/student/dashboard" class="ni"  title="Dashboard"><i class="ti ti-layout-dashboard"></i></a>
+            <a href="/student/tasks"     class="ni"  title="My Tasks"><i class="ti ti-clipboard-list"></i></a>
+            <a href="/student/planner"   class="ni on" title="Planner"><i class="ti ti-calendar"></i></a>
+            <a href="/student/pomodoro"  class="ni"  title="Pomodoro"><i class="ti ti-clock"></i></a>
+        </nav>
+        <div class="nav-bottom">
+            <a href="/logout"   class="ni" title="Logout"><i class="ti ti-logout"></i></a>
+            <div class="uav" id="userAvatar">?</div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="topbar">
+            <div>
+                <div class="greeting">Study Planner</div>
+                <div class="subdate" id="subdate"></div>
+            </div>
+            <div class="topright">
+                <button id="darkModeToggle" class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">
+                    <i class="ti ti-moon"></i>
+                </button>
+                <button class="addbtn" onclick="openAddModal()"><i class="ti ti-plus"></i> Add event</button>
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="cal-card">
+                <!-- Calendar header -->
+                <div class="cal-header">
+                    <button class="cal-nav" onclick="changeMonth(-1)"><i class="ti ti-chevron-left"></i></button>
+                    <div class="cal-month-label" id="monthLabel">June 2026</div>
+                    <button class="cal-nav" onclick="changeMonth(1)"><i class="ti ti-chevron-right"></i></button>
+                </div>
+
+                <!--day labels-->
+                <div class="cal-days-header">
+                    <div>Sun</div><div>Mon</div><div>Tue</div>
+                    <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+
+                <!--the grid-->
+                <div class="cal-grid" id="calGrid"></div>
+            </div>
+
+            <!--llegend-->
+            <div class="legend">
+                <div class="legend-item"><div class="legend-dot" style="background:#7C3AED"></div> Task due date</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#059669"></div> Study session</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#F43F5E"></div> Overdue</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DAY POPUP MODAL -->
+<div class="modal-overlay" id="dayModal" onclick="closeDayModal(event)">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title" id="modalDate">Wednesday 4 June</div>
+            <button class="modal-close" onclick="closeDayModalDirect()"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<!--the event model-->
+<div class="modal-overlay" id="addModal" onclick="closeAddModal(event)">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title">Add study session</div>
+            <button class="modal-close" onclick="closeAddModalDirect()"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-field">
+                <label>Title</label>
+                <input type="text" id="newTitle" placeholder="e.g. Maths revision" />
+            </div>
+            <div class="form-field">
+                <label>Date</label>
+                <input type="date" id="newDate" />
+            </div>
+            <button class="save-btn" onclick="addSession()">Save event</button>
+        </div>
+    </div>
+</div>
+
+<script src="/js/planner.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log('Service worker registered'))
+            .catch(err => console.log('SW error:', err))
+    }
+</script>
+</body>
+</html>

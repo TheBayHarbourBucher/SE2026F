@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/darkmode.css">
+    <script src="/js/darkmode.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync — Pomodoro Timer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/pomodoro.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7C3AED">
+</head>
+<body>
+<div class="shell">
+    <div class="sidebar">
+        <div class="logo"><div class="logo-icon"><i class="ti ti-bolt"></i></div></div>
+        <nav class="nav">
+            <a href="/student/dashboard" class="ni"    title="Dashboard"><i class="ti ti-layout-dashboard"></i></a>
+            <a href="/student/tasks"     class="ni"    title="My Tasks"><i class="ti ti-clipboard-list"></i></a>
+            <a href="/student/planner"   class="ni"    title="Planner"><i class="ti ti-calendar"></i></a>
+            <a href="/student/pomodoro"  class="ni on" title="Pomodoro"><i class="ti ti-clock"></i></a>
+        </nav>
+        <div class="nav-bottom">
+            <a href="/logout"   class="ni" title="Logout"><i class="ti ti-logout"></i></a>
+            <div class="uav" id="userAvatar">?</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div>
+                <div class="greeting">Pomodoro Timer</div>
+                <div class="subdate" id="subdate"></div>
+            </div>
+            <button id="darkModeToggle" class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">
+                <i class="ti ti-moon"></i>
+            </button>
+        </div>
+
+        <div class="body">
+            <div class="pom-layout">
+
+                <!-- LEFT — Timer -->
+                <div class="pom-card">
+
+                    <!-- Mode tabs -->
+                    <div class="pom-tabs">
+                        <button class="pom-tab active" id="tabFocus" onclick="setMode('focus')">Focus</button>
+                        <button class="pom-tab" id="tabShort" onclick="setMode('short')">Short break</button>
+                        <button class="pom-tab" id="tabLong"  onclick="setMode('long')">Long break</button>
+                    </div>
+                    <!--the circle-->
+                    <div class="pom-ring-wrap">
+                        <svg class="pom-svg" viewBox="0 0 200 200">
+                            <!-- Background ring -->
+                            <circle class="ring-bg" cx="100" cy="100" r="88"/>
+                            <!-- Progress ring -->
+                            <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="88"/>
+                        </svg>
+                        <div class="pom-center">
+                            <div class="pom-time" id="timerDisplay">25:00</div>
+                            <div class="pom-mode-label" id="modeLabel">Focus time</div>
+                        </div>
+                    </div>
+                    <!--controls-->
+                    <div class="pom-controls">
+                        <button class="pom-btn-secondary" onclick="resetTimer()"><i class="ti ti-refresh"></i></button>
+                        <button class="pom-btn-primary" id="startBtn" onclick="toggleTimer()">
+                            <i class="ti ti-player-play" id="startIcon"></i>
+                            <span id="startLabel">Start</span>
+                        </button>
+                        <button class="pom-btn-secondary" onclick="skipTimer()"><i class="ti ti-player-skip-forward"></i></button>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT — Stats + Settings -->
+                <div class="pom-right">
+
+                    <!-- Today's sessions -->
+                    <div class="pom-stats-card">
+                        <div class="pom-card-title"><i class="ti ti-flame"></i> Today's progress</div>
+                        <div class="pom-sessions-grid">
+                            <div class="session-dot-wrap" id="sessionDots"></div>
+                        </div>
+                        <div class="pom-stat-row">
+                            <div class="pom-stat">
+                                <div class="pom-stat-num" id="statSessions">0</div>
+                                <div class="pom-stat-lbl">Sessions</div>
+                            </div>
+                            <div class="pom-stat">
+                                <div class="pom-stat-num" id="statMinutes">0</div>
+                                <div class="pom-stat-lbl">Minutes focused</div>
+                            </div>
+                            <div class="pom-stat">
+                                <div class="pom-stat-num" id="statStreak">0</div>
+                                <div class="pom-stat-lbl">Session streak</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="pom-stats-card">
+                        <div class="pom-card-title"><i class="ti ti-settings"></i> Timer settings</div>
+                        <div class="pom-setting">
+                            <label>Focus duration</label>
+                            <div class="pom-setting-controls">
+                                <button onclick="adjustTime('focus', -5)">−</button>
+                                <span id="focusLabel">25 min</span>
+                                <button onclick="adjustTime('focus', 5)">+</button>
+                            </div>
+                        </div>
+                        <div class="pom-setting">
+                            <label>Short break</label>
+                            <div class="pom-setting-controls">
+                                <button onclick="adjustTime('short', -1)">−</button>
+                                <span id="shortLabel">5 min</span>
+                                <button onclick="adjustTime('short', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="pom-setting">
+                            <label>Long break</label>
+                            <div class="pom-setting-controls">
+                                <button onclick="adjustTime('long', -5)">−</button>
+                                <span id="longLabel">15 min</span>
+                                <button onclick="adjustTime('long', 5)">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--tips-->
+                    <div class="pom-stats-card pom-tips">
+                        <div class="pom-card-title"><i class="ti ti-bulb"></i> How it works</div>
+                        <div class="tip-item"><span class="tip-num">1</span> Focus for 25 minutes</div>
+                        <div class="tip-item"><span class="tip-num">2</span> Take a 5 minute break</div>
+                        <div class="tip-item"><span class="tip-num">3</span> After 4 sessions take a long break</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/pomodoro.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log('Service worker registered'))
+            .catch(err => console.log('SW error:', err))
+    }
+</script>
+</body>
+</html>

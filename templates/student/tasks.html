@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/darkmode.css">
+    <script src="/js/darkmode.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync — My Tasks</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/tasks.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#7C3AED">
+</head>
+<body>
+<div class="shell">
+    <div class="sidebar">
+        <div class="logo"><div class="logo-icon"><i class="ti ti-bolt"></i></div></div>
+        <nav class="nav">
+            <a href="/student/dashboard" class="ni"    title="Dashboard"><i class="ti ti-layout-dashboard"></i></a>
+            <a href="/student/tasks"     class="ni on" title="My Tasks"><i class="ti ti-clipboard-list"></i></a>
+            <a href="/student/planner"   class="ni"    title="Planner"><i class="ti ti-calendar"></i></a>
+            <a href="/student/pomodoro"  class="ni"    title="Pomodoro"><i class="ti ti-clock"></i></a>
+        </nav>
+        <div class="nav-bottom">
+            <a href="/logout"   class="ni" title="Logout"><i class="ti ti-logout"></i></a>
+            <div class="uav" id="userAvatar">?</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <div>
+                <div class="greeting">My Tasks</div>
+                <div class="subdate" id="subdate"></div>
+            </div>
+            <div class="topright">
+                <button id="darkModeToggle" class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">
+                    <i class="ti ti-moon"></i>
+                </button>
+                <button class="sort-btn" onclick="toggleSort()">
+                    <i class="ti ti-arrows-sort"></i>
+                    <span id="sortLabel">Due date ↑</span>
+
+                </button>
+            </div>
+        </div>
+
+        <div class="body">
+
+            <!-- Filter tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="setFilter('all', this)">All</button>
+                <button class="filter-tab" onclick="setFilter('pending', this)">Pending</button>
+                <button class="filter-tab" onclick="setFilter('complete', this)">Completed</button>
+                <button class="filter-tab" onclick="setFilter('overdue', this)">Overdue</button>
+            </div>
+
+            <!-- Tasks list -->
+            <div class="tasks-card">
+                <div id="tasksList"><div class="loading">Loading tasks...</div></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/js/tasks.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(() => console.log('Service worker registered'))
+            .catch(err => console.log('SW error:', err))
+    }
+</script>
+</body>
+</html>
